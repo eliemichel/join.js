@@ -1,3 +1,4 @@
+*This is the code repository accompanying the blog post [http://blog.exppad.com/article/promises-without-a-then](http://blog.exppad.com/article/promises-without-a-then). Feel free to comment through the bug tracker or using [webmentions](https://indieweb.org/webmention)*
 
 Promises without a then
 =======================
@@ -336,7 +337,13 @@ Then, instead of modifying the `join()` responsible for the rendering by adding 
 The complete code is not ready to be released yet, but I hope that these excerpts convinced you that the `join()` pattern can really make a difference when optimizing applications with critical dependency orders.
 
 
-Appendix A: Complete source code
+Appendix A: Code repository
+---------------------------
+
+I put the small code of `join()` and `decoratedJoin()` on GitHub: [eliemichel/join.js](https://github.com/eliemichel/join.js). Feel free to suggest improvements, typo fixes and tooling, or to just use the bug tracker to comment on this!
+
+
+Appendix B: Complete source code
 --------------------------------
 
     // (Units are expressed in the International System)
@@ -401,4 +408,3 @@ Crêpes can be very thin. Add some water or milk if they are not enough. The fir
 And please, stop using those cups/spoons/oz/whatever that definitely don't sum up correctly. You just need liters and grammes. And in case you feel lost, get yourself the one and only measuring cup you need to cook with correct units.
 
 Note to writers: As I was writing this article, I found recipes to be a very good example for programming examples! Much better than I though when just wanting to make my example a bit funnier than `doSomething()`. You have to do some things before others, some at the same time, you need to wait, to check for the cooking, etc. Plus, I suspect it to be a very good vector of soft power, in case you plan to impose your regional customs and food tradition to the world! I'm not originated from French Bretagne, though, but, you know, I do like crêpes anyway. Who doesn't?
-
