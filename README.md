@@ -3,7 +3,7 @@
 Promises without a then
 =======================
 
-If you got interested about [modern JavaScript](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f) in the last few years, you might have heard of [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). They are a very elegant way of dealing with asynchronous actions and avoid callbacks within callbacks within callbacks.
+If you got interested in [modern JavaScript](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f) in the last few years, you might have heard of [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). They are a very elegant way of dealing with asynchronous actions and avoid callbacks within callbacks within callbacks.
 
 A practical example
 -------------------
@@ -51,7 +51,7 @@ There is no way of adding the milk afterwards with this structure. This is terri
 
 To solve this, we should recall that promises are variables, so can be manipulated like variables. We have to use the promise to the ingredients a second time. We make the `flourAndEggsMixture.graduallyAdd` wait for both the mixture and for the ingredients using `Promise.all()`.
 
-Note: Yes, the ingredients are already needed to make the mixture, so the ingredients will always be resolved first. But we don't really care, we just say "I need ingredients to be ready".
+**Note:** Yes, the ingredients are already needed to make the mixture, so the ingredients will always be resolved first. But we don't really care, we just say "I need ingredients to be ready".
 
     let ingredients_promise = fetchIngredients();
 
@@ -72,7 +72,7 @@ Note: Yes, the ingredients are already needed to make the mixture, so the ingred
     .then(pan.cook)
     .then(eat);
 
-Note: I don't like mixing `camlCase` and `snake_case`, but it is used here for some kind of typing, so it's all right. We'll get rid of that later on.
+**Note:** I don't like mixing `camlCase` and `snake_case`, but it is used here for some kind of typing, so it's all right. We'll get rid of that later on.
 
 Problem is: this makes the code much much more verbose than the callback based one, which would look like:
     
@@ -111,7 +111,8 @@ The most important line in this is:
 
 If we push a bit further this example, we'll get a lot of such lines. For instance:
 
-    let $crepes = Promise.all([$batter, $hotPan]).then(function([batter, hotPan]) { ... });
+    let $crepes = Promise.all([$batter, $hotPan])
+    .then(function([batter, hotPan]) { ... });
 
     let $lemonCrepe = Promise.all([$crepes, $lemonJuice, $sugar])
     .then(function([crepes, lemonJuice, sugar]) { ... });
@@ -246,11 +247,11 @@ And makes a many more things easy to build. Let's say we want to check that our 
         // Here we are sure that milk and eggs are fresh!
     });
 
-Note: The decorator, `ensureFresh()`, must return a promise!
+**Note:** The decorator, `ensureFresh()`, must return a promise!
 
 Of course, you can still reuse the result of a decorated `join()` as a promise:
 
-    let $dryMojito = $freshJoin($mint, $greenLemon, $whiteRhum, $ice, shake);
+    let $dryMojito = freshJoin($mint, $greenLemon, $whiteRhum, $ice, shake);
     join($dryMojito, drink);
 
 
@@ -289,7 +290,7 @@ Then, I wrote the init steps from the end, wondering "what do I need to render a
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, object.size);
     }
 
-This required me to write some joins before:
+Ok, so I need promises to the `gl` API, the `object` to render, and the `shaderProgram`. This required me to write some joins before:
 
     let $gl = join($context, context => initWebGL(context.canvas));
 
@@ -319,6 +320,7 @@ But I also needed to wait for the object's textures to be correctly loaded and b
 
 Then, instead of modifying the `join()` responsible for the rendering by adding `_allTexturesReady` as a dependency, I made a difference between the *definition* of the rendering and its *execution*. So a first `join()` returns a promise to a rendering function, which is then executed when the event `_allTexturesReady` (and potentially others) is fired:
 
+    // Yes, this is a promise to a function
     let $render = join($context, $gl, $object, $shaderProgram, function(context, gl, object, shaderProgram) {
         return function() {
             gl.useProgram(shaderProgram);
